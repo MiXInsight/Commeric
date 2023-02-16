@@ -1,0 +1,9 @@
+import os, sys
+from subprocess import check_output, call
+
+file = check_output(["pip.exe", "list", "-o", "--format=json"])
+line = str(file).split()
+
+for distro in line[1::8]:
+    distro = str(distro).strip('"\",')
+    call("pip install --upgrade " + distro, shell=True)
